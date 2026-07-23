@@ -1,0 +1,980 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #16223b;
+  --ink-soft: #536078;
+  --paper: #f2efe5;
+  --paper-bright: #fbfaf5;
+  --red: #d64b3d;
+  --red-dark: #a8322a;
+  --line: rgba(22, 34, 59, 0.18);
+  --faint-line: rgba(22, 34, 59, 0.08);
+  --font-geist-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, sans-serif;
+  --font-geist-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+@theme inline {
+  --color-background: var(--paper);
+  --color-foreground: var(--ink);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", "Noto Sans JP",
+    Arial, sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+.site-shell {
+  position: relative;
+  width: min(1480px, calc(100% - 48px));
+  min-height: 100vh;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.paper-noise {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, transparent 49.8%, rgba(22, 34, 59, 0.018) 50%, transparent 50.2%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.28) 0 1px, transparent 1px 4px),
+    var(--paper);
+}
+
+.masthead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 88px;
+  border-bottom: 1px solid var(--ink);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.brand-mark {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  background: var(--ink);
+  color: var(--paper-bright);
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: 25px;
+}
+
+.brand b,
+.brand small {
+  display: block;
+}
+
+.brand b {
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: 21px;
+  letter-spacing: 0.15em;
+}
+
+.brand small,
+.masthead-note,
+.kicker,
+.control-label,
+.challenge-heading > div > p,
+.trainer-card h3,
+.lock-button,
+.use-toggle,
+.roll-zone > div > p,
+footer {
+  font-family: var(--font-geist-mono), "Roboto Mono", monospace;
+  letter-spacing: 0.12em;
+}
+
+.brand small {
+  margin-top: 2px;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.masthead-note {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.masthead-note span:first-child {
+  padding: 7px 10px;
+  border: 1px solid var(--ink);
+}
+
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 190px;
+  gap: 80px;
+  padding: 82px 4vw 68px;
+  border-bottom: 1px solid var(--line);
+}
+
+.hero::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 18px;
+  width: 1px;
+  background: var(--red);
+  content: "";
+}
+
+.hero-copy {
+  max-width: 920px;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 22px;
+  color: var(--red-dark);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.kicker i {
+  width: 42px;
+  height: 1px;
+  background: var(--red);
+}
+
+.hero h1 {
+  max-width: 940px;
+  margin: 0;
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", Georgia, serif;
+  font-size: clamp(56px, 7.5vw, 116px);
+  font-weight: 500;
+  letter-spacing: -0.065em;
+  line-height: 0.88;
+}
+
+.hero h1 span {
+  display: block;
+  margin-top: 20px;
+  color: var(--red);
+  font-size: 0.52em;
+  letter-spacing: 0.03em;
+}
+
+.hero-intro {
+  max-width: 630px;
+  margin: 32px 0 0;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.hero-seal {
+  align-self: center;
+  justify-self: end;
+  display: grid;
+  width: 164px;
+  height: 164px;
+  place-items: center;
+  border: 3px double var(--red);
+  color: var(--red);
+  transform: rotate(2deg);
+}
+
+.hero-seal span {
+  font-family: "Yu Mincho", serif;
+  font-size: 74px;
+  line-height: 1;
+}
+
+.hero-seal small {
+  margin-top: -38px;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.control-deck {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  border-bottom: 1px solid var(--ink);
+}
+
+.level-group,
+.setting-group {
+  padding: 28px 30px;
+}
+
+.level-group {
+  border-right: 1px solid var(--ink);
+}
+
+.control-label {
+  margin: 0 0 15px;
+  color: var(--ink-soft);
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.level-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--ink);
+}
+
+.level-tabs button {
+  min-height: 62px;
+  padding: 8px 16px;
+  border: 0;
+  border-right: 1px solid var(--ink);
+  background: transparent;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.level-tabs button:last-child {
+  border-right: 0;
+}
+
+.level-tabs button:hover,
+.level-tabs button.active {
+  background: var(--ink);
+  color: var(--paper-bright);
+}
+
+.level-tabs span,
+.level-tabs small {
+  display: block;
+}
+
+.level-tabs span {
+  font-family: "Yu Mincho", serif;
+  font-size: 20px;
+}
+
+.level-tabs small {
+  margin-top: 4px;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.switch-row {
+  display: flex;
+  min-height: 62px;
+  align-items: center;
+  gap: 28px;
+}
+
+.switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  cursor: pointer;
+}
+
+.switch input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.switch > span {
+  position: relative;
+  width: 36px;
+  height: 19px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  transition: background 160ms ease;
+}
+
+.switch > span::after {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--ink);
+  content: "";
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.switch input:checked + span {
+  background: var(--red);
+  border-color: var(--red);
+}
+
+.switch input:checked + span::after {
+  background: white;
+  transform: translateX(17px);
+}
+
+.switch input:focus-visible + span {
+  outline: 3px solid rgba(214, 75, 61, 0.25);
+  outline-offset: 3px;
+}
+
+.switch b {
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.challenge-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 58px 30px 25px;
+}
+
+.challenge-heading > div:first-child {
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 22px;
+  align-items: baseline;
+}
+
+.challenge-heading > div > p {
+  grid-column: 1 / -1;
+  margin: 0 0 10px;
+  color: var(--red-dark);
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.challenge-heading h2 {
+  margin: 0;
+  font-family: "Yu Mincho", serif;
+  font-size: 42px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+.challenge-heading > div > span {
+  color: var(--ink-soft);
+  font-size: 12px;
+}
+
+.challenge-count {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: right;
+}
+
+.challenge-count b {
+  color: var(--red);
+  font-family: "Yu Mincho", serif;
+  font-size: 38px;
+  font-weight: 500;
+}
+
+.challenge-count span {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  line-height: 1.5;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 0 30px 30px;
+}
+
+.trainer-card {
+  position: relative;
+  display: flex;
+  min-height: 330px;
+  flex-direction: column;
+  border: 1px solid var(--ink);
+  background: rgba(251, 250, 245, 0.72);
+  box-shadow: 4px 4px 0 rgba(22, 34, 59, 0.08);
+  transition: opacity 180ms ease, transform 180ms ease, filter 180ms ease;
+}
+
+.trainer-card::before {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 46px;
+  height: 4px;
+  background: var(--card-accent, var(--red));
+  content: "";
+}
+
+.trainer-card:hover {
+  transform: translateY(-2px);
+}
+
+.trainer-card.inactive {
+  opacity: 0.34;
+  filter: grayscale(0.82);
+}
+
+.trainer-card.inactive:hover {
+  opacity: 0.7;
+  filter: grayscale(0.25);
+}
+
+.card-starter { --card-accent: #d64b3d; }
+.card-pattern { --card-accent: #2c5b91; }
+.card-ender { --card-accent: #bd7b24; }
+.card-scene { --card-accent: #47766b; }
+.card-wildcard { --card-accent: #7b4c86; }
+.card-idiom { --card-accent: #8a3030; }
+
+.card-topline {
+  display: grid;
+  grid-template-columns: 38px 1fr auto;
+  align-items: center;
+  min-height: 74px;
+  gap: 11px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.card-number {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid var(--card-accent);
+  color: var(--card-accent);
+  font-family: "Yu Mincho", serif;
+}
+
+.card-topline p {
+  margin: 0 0 2px;
+  color: var(--ink-soft);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+}
+
+.trainer-card h3 {
+  margin: 0;
+  font-size: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.lock-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 0 5px 8px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 7px;
+  font-weight: 800;
+}
+
+.lock-button span {
+  color: var(--ink-soft);
+  font-size: 11px;
+}
+
+.lock-button.locked {
+  color: var(--red-dark);
+}
+
+.lock-button.locked span {
+  color: var(--red);
+}
+
+.card-content {
+  flex: 1;
+  padding: 26px 22px 20px;
+}
+
+.japanese {
+  margin: 0;
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: clamp(25px, 2.4vw, 38px);
+  font-weight: 500;
+  letter-spacing: 0.035em;
+  line-height: 1.35;
+}
+
+.card-pattern .japanese,
+.card-ender .japanese {
+  font-size: clamp(22px, 2vw, 32px);
+}
+
+.romaji {
+  margin: 8px 0 0;
+  color: var(--red-dark);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+  font-style: italic;
+  letter-spacing: 0.08em;
+}
+
+.card-details {
+  margin-top: 18px;
+}
+
+.meaning {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.note {
+  margin: 8px 0 0;
+  color: var(--ink-soft);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.example {
+  margin: 13px 0 0;
+  padding-top: 11px;
+  border-top: 1px solid var(--faint-line);
+  color: var(--ink);
+  font-family: "Yu Mincho", serif;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.example span {
+  display: inline-grid;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  place-items: center;
+  background: var(--ink);
+  color: white;
+  font-family: "Yu Gothic", sans-serif;
+  font-size: 8px;
+}
+
+.reveal-button {
+  display: flex;
+  width: 100%;
+  min-height: 78px;
+  margin-top: 22px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 12px 15px;
+  border: 1px dashed var(--line);
+  background: rgba(22, 34, 59, 0.025);
+  color: var(--ink-soft);
+  cursor: pointer;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.reveal-button span {
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-family: "Yu Mincho", serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: none;
+}
+
+.use-toggle {
+  display: flex;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 0;
+  border-top: 1px solid var(--line);
+  background: transparent;
+  cursor: pointer;
+  font-size: 7px;
+  font-weight: 800;
+}
+
+.use-toggle:hover {
+  background: var(--ink);
+  color: var(--paper-bright);
+}
+
+.roll-zone {
+  display: grid;
+  grid-template-columns: 1fr minmax(330px, 470px);
+  align-items: center;
+  gap: 30px;
+  margin: 18px 30px 60px;
+  padding: 24px 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+.roll-zone > div > p {
+  margin: 0 0 6px;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.roll-zone > div > span {
+  color: var(--ink-soft);
+  font-size: 12px;
+}
+
+.roll-button {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  min-height: 76px;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 20px 8px 9px;
+  border: 0;
+  background: var(--red);
+  color: white;
+  cursor: pointer;
+  text-align: left;
+  box-shadow: 4px 4px 0 var(--red-dark);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.roll-button:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--red-dark);
+}
+
+.roll-button:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+.roll-kanji {
+  display: grid;
+  width: 56px;
+  height: 58px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  font-family: "Yu Mincho", serif;
+  font-size: 30px;
+}
+
+.roll-button b,
+.roll-button small {
+  display: block;
+  font-family: var(--font-geist-mono), monospace;
+  letter-spacing: 0.1em;
+}
+
+.roll-button b {
+  font-size: 11px;
+}
+
+.roll-button small {
+  margin-top: 5px;
+  opacity: 0.7;
+  font-size: 7px;
+}
+
+.roll-button .arrow {
+  font-size: 22px;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 26px 30px 35px;
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.mobile-draw-dock {
+  display: none;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(214, 75, 61, 0.34);
+  outline-offset: 3px;
+}
+
+@media (max-width: 1000px) {
+  .site-shell {
+    width: min(100% - 30px, 900px);
+  }
+
+  .hero {
+    grid-template-columns: 1fr 125px;
+    gap: 30px;
+    padding-top: 64px;
+  }
+
+  .hero-seal {
+    width: 120px;
+    height: 120px;
+  }
+
+  .hero-seal span {
+    font-size: 54px;
+  }
+
+  .control-deck {
+    grid-template-columns: 1fr;
+  }
+
+  .level-group {
+    border-right: 0;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 680px) {
+  .site-shell {
+    width: 100%;
+    padding-bottom: 104px;
+  }
+
+  .masthead {
+    min-height: 74px;
+    padding: 0 18px;
+  }
+
+  .masthead-note span:last-child {
+    display: none;
+  }
+
+  .hero {
+    display: block;
+    padding: 58px 24px 48px 38px;
+  }
+
+  .hero::before {
+    left: 20px;
+  }
+
+  .hero h1 {
+    font-size: clamp(50px, 15.7vw, 76px);
+  }
+
+  .hero-intro {
+    font-size: 14px;
+  }
+
+  .hero-seal {
+    display: none;
+  }
+
+  .level-group,
+  .setting-group {
+    padding: 23px 18px;
+  }
+
+  .level-tabs button {
+    padding: 7px;
+  }
+
+  .switch-row {
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+
+  .challenge-heading {
+    align-items: flex-start;
+    padding: 46px 18px 20px;
+  }
+
+  .challenge-heading > div:first-child {
+    display: block;
+  }
+
+  .challenge-heading h2 {
+    font-size: 32px;
+  }
+
+  .challenge-heading > div > span {
+    display: block;
+    margin-top: 7px;
+  }
+
+  .challenge-count {
+    display: none;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+    padding: 0 18px 24px;
+  }
+
+  .trainer-card {
+    min-height: 300px;
+  }
+
+  .japanese {
+    font-size: 32px;
+  }
+
+  .roll-zone {
+    grid-template-columns: 1fr;
+    margin: 16px 18px 46px;
+  }
+
+  .roll-button {
+    grid-row: 1;
+  }
+
+  .mobile-draw-dock {
+    position: fixed;
+    right: 18px;
+    bottom: max(14px, env(safe-area-inset-bottom));
+    left: 18px;
+    z-index: 50;
+    display: block;
+    filter: drop-shadow(0 8px 14px rgba(22, 34, 59, 0.24));
+    transition: left 180ms ease, width 180ms ease;
+  }
+
+  .mobile-draw-dock.minimized {
+    left: auto;
+    width: 102px;
+  }
+
+  .mobile-draw-tab {
+    position: absolute;
+    top: -19px;
+    right: 8px;
+    display: flex;
+    height: 21px;
+    align-items: center;
+    gap: 4px;
+    padding: 0 9px;
+    border: 0;
+    border-radius: 4px 4px 0 0;
+    background: var(--ink);
+    color: var(--paper-bright);
+    cursor: pointer;
+    font-family: var(--font-geist-mono), monospace;
+    font-size: 6px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+  }
+
+  .mobile-draw-tab span {
+    font-size: 10px;
+  }
+
+  .mobile-draw-main {
+    display: grid;
+    width: 100%;
+    min-height: 64px;
+    grid-template-columns: 48px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 7px 16px 7px 8px;
+    border: 1px solid var(--red-dark);
+    background: var(--red);
+    color: white;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .minimized .mobile-draw-main {
+    min-height: 54px;
+    grid-template-columns: 38px auto;
+    gap: 8px;
+    padding: 7px 11px 7px 7px;
+  }
+
+  .mobile-draw-kanji {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    font-family: "Yu Mincho", serif;
+    font-size: 27px;
+  }
+
+  .minimized .mobile-draw-kanji {
+    width: 38px;
+    height: 38px;
+    font-size: 22px;
+  }
+
+  .mobile-draw-label b,
+  .mobile-draw-label small {
+    display: block;
+    font-family: var(--font-geist-mono), monospace;
+    letter-spacing: 0.1em;
+  }
+
+  .mobile-draw-label b {
+    font-size: 9px;
+  }
+
+  .mobile-draw-label small {
+    margin-top: 4px;
+    opacity: 0.72;
+    font-size: 6px;
+  }
+
+  .mobile-draw-arrow {
+    font-size: 19px;
+  }
+
+  footer {
+    padding: 24px 18px 30px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
